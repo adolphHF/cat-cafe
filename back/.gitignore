@@ -1,5 +1,5 @@
 # Ignore virtual environment
-.venv
+/.venv
 
 # Ignore Python bytecode files
 /database/__pycache__
