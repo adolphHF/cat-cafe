@@ -1,0 +1,44 @@
+body {
+    background-image: url('fondogato.svg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+}
+
+.icon-big {
+    font-size: 3em; 
+    margin: 10px; 
+  }
+
+  #inicio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* O ajusta la altura según tus necesidades */
+  }
+  
+  .img-fluid {
+    max-width: 200%; /* Ajusta el tamaño máximo de la imagen */
+    max-height: 200%; /* Ajusta la altura máxima de la imagen */
+  }
+
+  #inicio .container {
+    max-width: 800px; 
+    margin: 0 auto; 
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .custom-bg-white {
+    background-color: white;
+    display: inline-block;
+  }
+
+  #inicio img {
+    border-radius: 20px;
+    background-color: #91B3D4;
+}
