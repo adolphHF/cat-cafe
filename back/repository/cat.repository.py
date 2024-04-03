@@ -1,4 +1,7 @@
-from database.connectionPool import connectionPool
+import sys
+sys.path.append('../database')
+
+from connectionPool import connectionPool
 
 conn = connectionPool.getConnection()
 
