@@ -1,5 +1,6 @@
 import sys
-sys.path.append('../database')
+sys.path.insert(0, 'C:/Users/adolh/OneDrive/Escritorio/cat-cafe/back/database')
+#Luisen Option sys.path.append('../database')
 
 from connectionPool import connectionPool
 
