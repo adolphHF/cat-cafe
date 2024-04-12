@@ -1,7 +1,3 @@
-import sys
-#sys.path.insert(0, 'C:/Users/adolh/OneDrive/Escritorio/cat-cafe/back/database')
-sys.path.append('../database')
-
 import shortuuid
 
 class CatRepository:
