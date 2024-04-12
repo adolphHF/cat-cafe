@@ -15,7 +15,7 @@ class SQLiteConnectionPool:
 
         for _ in range(maxConnections):
             self.connections.put(self.createConnection())
-
+    
     def createConnection(self):
         return sqlite3.connect(self.database)
 

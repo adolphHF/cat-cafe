@@ -1,61 +1,54 @@
 import sys
+#sys.path.insert(0, 'C:/Users/adolh/OneDrive/Escritorio/cat-cafe/back/database')
+sys.path.append('../database')
+
 import shortuuid
-from connectionPool import connectionPool
-
-sys.path.insert(0, 'C:/Users/adolh/OneDrive/Escritorio/cat-cafe/back/database')
-#Luisen Option sys.path.append('../database')
-
-conn = connectionPool.getConnection()
-
-cursor = conn.cursor()
 
 class CatRepository:
 
-    def create(data):
+    def create(data, conn, cursor):
         try:
             cat_data = (shortuuid.uuid(), data['name'], data['age'], data['race'], data['sex'])
             cursor.execute("INSERT INTO cat (id, name, age, race, sex) VALUES (?, ?, ?, ?, ?)", cat_data)
             conn.commit()
-        finally:
-            connectionPool.releaseConnection(conn)
+        except Exception as e:
+            print("Error occurred:", e)
 
-    def getAll():
+    def getAll(conn, cursor):
         try:
             cursor.execute("SELECT * FROM cat")
             rows = cursor.fetchall()
             return rows
-        finally:
-            connectionPool.releaseConnection(conn)
+        except Exception as e:
+            print("Error occurred:", e)
     
-    def getOne(id):
+    def getOne(id, conn, cursor):
         try:
             cursor.execute("SELECT * FROM cat WHERE id = ?", (id,))
             rows = cursor.fetchall()
             return rows
-        finally:
-            connectionPool.releaseConnection(conn)
+        except Exception as e:
+            print("Error occurred:", e)
     
-    def delete(id):
+    def delete(id, conn, cursor):
         try:
             cursor.execute("DELETE FROM cat WHERE id = ?", (id,))
             conn.commit()
-        finally:
-            connectionPool.releaseConnection(conn)
+        except Exception as e:
+            print("Error occurred:", e)
 
-    def update(data, id):
+    def update(data, id, conn, cursor):
         try:
             cat_data = (data['name'], data['age'], data['race'], data['sex'], id)
             cursor.execute("UPDATE cat SET name = ?, age = ?, race = ?, sex = ? WHERE id = ?", cat_data)
             conn.commit()
-        finally:
-            connectionPool.releaseConnection(conn)
+        except Exception as e:
+            print("Error occurred:", e)
     
-    def updateAdopted(is_adopted, id):
+    def updateAdopted(is_adopted, id, conn, cursor):
         try:
             cat_data = (is_adopted, id)
             cursor.execute("UPDATE cat SET is_adopted = ? WHERE id = ?", cat_data)
             conn.commit()
-        finally:
-            connectionPool.releaseConnection(conn)
-
-repository = CatRepository()
+        except Exception as e:
+            print("Error occurred:", e)
