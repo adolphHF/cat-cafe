@@ -57,3 +57,5 @@ class CatRepository:
             conn.commit()
         finally:
             connectionPool.releaseConnection(conn)
+
+repository = CatRepository()
