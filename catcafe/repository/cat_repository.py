@@ -18,7 +18,7 @@ class CatRepository:
         except Exception as e:
             print("Error occurred:", e)
     
-    def getOne(id, conn, cursor):
+    def getOne(id, cursor):
         try:
             cursor.execute("SELECT * FROM cat WHERE id = ?", (id,))
             rows = cursor.fetchall()
