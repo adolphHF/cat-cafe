@@ -31,8 +31,20 @@ def createApplication():
         applicant_email = request.form['applicant_email']
         applicant_age = request.form['applicant_age']
         applicant_address = request.form['applicant_address']
+        #print("cat_id: "+cat_id+" applicant_name: "+applicant_name+" applicant_phone: "+applicant_phone+" applicant_email: "+applicant_email+" applicant_age: "+applicant_age+" applicant_address: "+applicant_address)
+        data = {
+            "cat_id" : cat_id,
+            "applicant_name" : applicant_name, 
+            "applicant_phone": applicant_phone,  
+            "applicant_email": applicant_email, 
+            "applicant_age" : applicant_age,  
+            "applicant_address": applicant_address
+        }
+        conn = g.db
+        cursor = conn.cursor()
 
-        print("cat_id: "+cat_id+" applicant_name: "+applicant_name+" applicant_phone: "+applicant_phone+" applicant_email: "+applicant_email+" applicant_age: "+applicant_age+" applicant_address: "+applicant_address)
+        ApplicationRepository.create(data,conn,cursor)
+
         return jsonify({"message": "application created succesfully"}),200
     except Exception as e:
         return jsonify({"error":str(e)}),500
@@ -40,7 +52,10 @@ def createApplication():
 @application_routes.route("/get/all")
 def getApplications():
     try:
-        return jsonify({"message": "all cats"}), 200
+        conn = g.db
+        cursor = conn.cursor()
+        applications = ApplicationRepository.getAll(conn,cursor)
+        return jsonify({"applications": applications}), 200
     except Exception as e:
         return jsonify({ "error":str(e) }),500
 
@@ -50,13 +65,22 @@ def getApplications():
 @application_routes.route("/update/status", methods = ["POST"])
 def updateStatus():
     try:
-        return jsonify({"message":"updated application status"}), 200
+        applicationId = request.form['id']
+        status = request.form['status']
+        conn = g.db
+        cursor = conn.cursor()
+        ApplicationRepository.updateStatus(status, applicationId, conn, cursor)
+        return jsonify({"message":"application status updated succesfully"}), 200
     except Exception as e:
         return jsonify({'error':str(e)}),500
 
 @application_routes.route("/delete", methods = ["POST"])
 def deleteApplication():
     try:
+        applicationId = request.form['id']
+        conn = g.db
+        cursor = conn.cursor()
+        ApplicationRepository.delete(applicationId, conn, cursor)
         return  jsonify({"message":"deleted cat"}),200
     except Exception as e:
         return jsonify({'error':str(e)}),500

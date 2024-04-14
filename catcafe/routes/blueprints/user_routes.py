@@ -20,22 +20,20 @@ def teardown_request(exception = None):
 
 @user_routes.route("/")
 def userHome():
-    return "<h1>User Home</h1>"
+    return "User Home",200
 
 @user_routes.route("/validate", methods = ["POST"])
 def validateUser():
     try:
         password = request.form['password']
         email = request.form['email']
-
-        conn = g.db.connection
+        conn = g.db
         cursor = conn.cursor()
 
         user = UserRepository.getUser(email, password, cursor)
 
         if user:
             return jsonify({"message": "user validated successfully"}), 200
-        #TODO invoke the repository to do the query and then check if the data received via post is the same that in db
         else:
             return jsonify({"message": "Invalid username or password"}), 401
     except Exception as e:
