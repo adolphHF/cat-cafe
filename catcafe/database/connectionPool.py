@@ -17,7 +17,7 @@ class SQLiteConnectionPool:
             self.connections.put(self.createConnection())
     
     def createConnection(self):
-        return sqlite3.connect(self.database)
+        return sqlite3.connect(self.database, check_same_thread=False)
 
     def getConnection(self):
         with self.lock:
