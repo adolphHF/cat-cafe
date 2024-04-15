@@ -52,3 +52,37 @@ Project Layout:
 
 
 main.py is responsible of execute the flask project, taking from routes/blueprint the corresponding routes
+
+
+**UPDATE**
+Currently the back is allocated in catCafe folder
+Run instructions
+cd catCafe
+cd routes
+flask --app run main or python main
+
+**endpoints**
+BASE_URL: http://localhost:5000/
+
+We are using blueprints in our project
+user prefix: /user
+cat prefix: /cat
+application prefix: /application
+all prefixes have a defaulte home route
+
+USER ROUTES
+/validate
+
+CAT ROUTES
+/create
+/get/all
+/get/one
+/update/catdata
+/update/adopted
+/delete
+
+APPLICATION ROUTES
+/create
+/get/all
+/update/status
+/delete
